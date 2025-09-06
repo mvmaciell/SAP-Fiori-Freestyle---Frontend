@@ -1,22 +1,45 @@
 <mvc:View controllerName="zmvov.controller.View1"
-    xmlns:mvc="sap.ui.core.mvc"
+ xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns:core="sap.ui.core"
     xmlns:t="sap.ui.table"
-    xmlns="sap.m"
-    xmlns:f="sap.ui.layout.form"
-    xmlns:core="sap.ui.core"> 
+    xmlns="sap.m">
 
     <Page id="page" title="{i18n>title}">
-          <Text id="_IDGenText" core:require="{ formatMessage: 'sap/base/strings/formatMessage' }"
-          text="{
-            parts:[
-              {path:'i18n>welcomeMsg'},
-              {path:'/usuario/nome'}
-            ],
-            formatter: 'formatMessage'
-        }"/>
 
-        <Button id="_IDGenButton" text="Exibir Mensagem" press="onExibirMensagem"/>
+      <VBox id="_IDGenVBox1" class="sapUiTinyMargin">
+        
+        <Label id="_IDGenLabel" text="Model padrão da view (origem: controller)"/>
+        <Text id="_IDGenText" text="{/usuario/nome}"/>
 
+        <Text id="_IDGenText1" text="--------------------------------------------------"/>
+
+        <Label id="_IDGenLabel1" text="Model 'dados' da view (origem: controller)"/>
+        <Text id="_IDGenText2" text="{dados>/usuario/nome}"/>
+
+        <Text id="_IDGenText3" text="--------------------------------------------------"/>
+        
+        <Label id="_IDGenLabel2" text="Model i18n - chave title (origem: manifest)"/>
+        <Text id="_IDGenText4" text="{i18n>title}"/>
+
+        <Text id="_IDGenText5" text="--------------------------------------------------"/>
+
+        <Label id="_IDGenLabel3" text="Model 'usuarios' (origem: manifest)"/>
+        <Text id="_IDGenText6" text="{usuarios>/0/id} - {usuarios>/0/nome}"/>
+
+        <Text id="_IDGenText7" text="--------------------------------------------------"/>
+        
+        <Label id="_IDGenLabel4" text="Model padrão do serviço (origem: manifest)"/>
+        <List id="_IDGenList" headerText="Ordens" items="{ path: '/OVCabSet' }" >
+          <StandardListItem id="_IDGenStandardListItem" title="Ordem {OrdemId}" description="{CriadoPor}"/>
+        </List>
+
+        <Text id="_IDGenText8" text="{/OVCabSet(1)/OrdemId} - {/OVCabSet(1)/CriadoPor}"/>
+
+        <Text id="_IDGenText9" text="--------------------------------------------------"/>
+
+        <Button id="_IDGenButton" text="Testar Models" press="onTestModels"/>
+        
+      </VBox>
     </Page>
 
 </mvc:View> 
