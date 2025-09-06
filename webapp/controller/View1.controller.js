@@ -1,41 +1,26 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller",
-    "sap/m/MessageToast"
-], 
-    (Controller, MessageToast) => {
-    "use strict";
+    "sap/ui/core/mvc/Controller"
 
-    return Controller.extend("zmvov.controller.View1", {
-        onInit: function () {
-            //alert("onInit");
-        },
+],
 
-        onBeforeRendering: function () {
-            //alert("onBeforeRendering");
-        },
+    function (Controller) {
+        "use strict";
 
-        onAfterRendering: function () {
-            //alert("onAfterRendering");
-        },
+        return Controller.extend("zov.controller.View1", {
+            onInit: function () {
+                var oView = this.getView();
+                var oModel = new sap.ui.model.json.JSONModel();
+                oModel.setData({ "usuario": { "nome": "Vinicius" } });
+                oView.setModel(oModel);
+            },
 
-        onExit: function () {
-            //alert("onExit");
-        },
+            onExibirMensagem: function () {
+                var oI18n = this.getView().getModel("i18n").getResourceBundle();
+                var oModel = this.getView().getModel();
+                var oData = oModel.getData();
+                var sText = oI18n.getText("welcomeMsg", [oData.usuario.nome]);
+                alert(sText);
 
-        onCalcular: function () {
-            var oView = this.getView();
-            var iB1 = parseInt(oView.byId("b1").getValue());
-            var iB2 = parseInt(oView.byId("b2").getValue());
-            var iB3 = parseInt(oView.byId("b3").getValue());
-            var iB4 = parseInt(oView.byId("b4").getValue());
-            var fResultado = 0;
-
-            fResultado = (iB1 + iB2 + iB3 + iB4) / 4;
-
-            oView.byId("resultado").setValue(fResultado);
-
-            MessageToast.show("Resultado = " + fResultado);
-
-        }
-    });
+            }
+        });
     });
